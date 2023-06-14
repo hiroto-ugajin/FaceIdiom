@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import android.widget.ImageView
 import jp.kanoyastore.hiroto.ugajin.faceidiom.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
