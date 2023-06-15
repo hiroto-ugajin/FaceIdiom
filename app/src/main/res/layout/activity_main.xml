@@ -7,24 +7,17 @@
     tools:ignore="ExtraText">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="慣用句"
+        android:text=""
         android:textStyle="bold"
+        android:textSize="30sp"
         android:textColor="#0000FF"
         android:layout_marginTop="16dp"
         android:maxLines="2"
         android:ellipsize="end"
         android:gravity="center" />
-
- <ImageView
-     android:layout_below="@id/text"
-     android:layout_above="@+id/resetButton"
-     android:id="@+id/imageView"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     />
 
     <Button
         android:id="@+id/resetButton"
@@ -34,6 +27,14 @@
         android:layout_alignParentBottom="true"
         android:text="RESET"
         android:textStyle="bold"/>
+
+ <ImageView
+     android:layout_below="@id/textView"
+     android:layout_above="@+id/resetButton"
+     android:id="@+id/imageView"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     />
 
 </RelativeLayout>
 
