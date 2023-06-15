@@ -49,24 +49,73 @@ class MainActivity : AppCompatActivity() {
             val height = binding.imageView.height
             val x = event.x
             val y = event.y
-            val centerX = binding.imageView.width / 2 // X座標の中心点
-            val centerY = binding.imageView.height / 2 // Y座標の中心点
-
+//            val centerX = binding.imageView.width / 2 // X座標の中心点
+//            val centerY = binding.imageView.height / 2 // Y座標の中心点
 
 
             when (event.action) {
+
                 MotionEvent.ACTION_DOWN -> {
+                    Log.d("face", "$x, $y")
+                    val currentItem = shuffledArray[currentIndex] // 現在表示されている要素
+                    val originalIndex = questionArray.indexOf(currentItem) // 元のquestionArrayでのインデックス
                     // タッチが開始された時の処理
-                    if (x <= 0.139*width && y >= height/2 - width/2 && y <= height/2 + width/2) {
+                    if ((x <= 0.139*width || x >= 0.854*width) && y >= height/2 - width/2 && y <= height/2 + width/2) {
+                        if (originalIndex/4 == 0) {
+                            mediaPlayer1.start()
+//                            Log.d("face", "$x, $y")
+//                            Log.d("face", "$width, $height")
+//                            Log.d("face", "$centerX, $centerY")
+                            currentIndex += 1
+                            binding.textView.text = shuffledArray[currentIndex]
+                        }
+                        else {
+                            mediaPlayer2.start()
+                            currentIndex += 1
+                            binding.textView.text = shuffledArray[currentIndex]
+                        }
+                    }
+                    if ((x > 0.139*width && x < 0.854*width) && (y >= height/2 - width/2 && y <= height/2 - 0.177*width))
+                    {   if (originalIndex/4 == 1) {
                         mediaPlayer1.start()
-                        Log.d("face", "$x, $y")
-                        Log.d("face", "$width, $height")
-                        Log.d("face", "$centerX, $centerY")
                         currentIndex += 1
                         binding.textView.text = shuffledArray[currentIndex]
-
-
                     }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+                    if (( 0.645*width < x && x < 0.775*width) && ( 0.445*height <= y && y <= 0.547*height ))
+                    {   if (originalIndex/4 == 2) {
+                        mediaPlayer1.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+                    if ((( 0.139*width < x && x <= 0.259*width) && (height/2 - 0.177*width < y && y < height/2 + width/2))
+                                || (( 0.645*width <= x && x < 0.854*width) && (height/2 - 0.177*width < y && y < height/2 + width/2))
+                        && !(( 0.645*width < x && x < 0.775*width) && ( 0.445*height <= y && y <= 0.547*height )))
+                    {   if (originalIndex/4 == 3) {
+                        mediaPlayer1.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+
+
+
                 }
                 MotionEvent.ACTION_MOVE -> {
                     // タッチが移動した時の処理
