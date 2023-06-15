@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                         binding.textView.text = shuffledArray[currentIndex]
                     }
                     }
-                    if (( 0.645*width < x && x < 0.775*width) && ( 0.445*height <= y && y <= 0.547*height ))
+                    if (( 0.645*width < x && x < 0.775*width) && ( 0.801*width <= y && y <= 0.963*width ))
                     {   if (originalIndex/4 == 2) {
                         mediaPlayer1.start()
                         currentIndex += 1
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     if ((( 0.139*width < x && x <= 0.259*width) && (height/2 - 0.177*width < y && y < height/2 + width/2))
                                 || (( 0.645*width <= x && x < 0.854*width) && (height/2 - 0.177*width < y && y < height/2 + width/2))
-                        && !(( 0.645*width < x && x < 0.775*width) && ( 0.445*height <= y && y <= 0.547*height )))
+                        && !(( 0.645*width < x && x < 0.775*width) && ( 0.801*width <= y && y <= 0.963*width  )))
                     {   if (originalIndex/4 == 3) {
                         mediaPlayer1.start()
                         currentIndex += 1
@@ -113,9 +113,57 @@ class MainActivity : AppCompatActivity() {
                         binding.textView.text = shuffledArray[currentIndex]
                     }
                     }
-
-
-
+                    if ((0.259*width < x && x < 0.645*width) && (height/2 - 0.177*width < y && y <= height/2 - 0.073*width))
+                    {   if (originalIndex/4 == 4) {
+                        mediaPlayer1.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+                    if ((0.259*width < x && x < 0.645*width) && (height/2 - 0.073*width < y && y <= height/2 + 0.044*width))
+                    {   if (originalIndex/4 == 5) {
+                        mediaPlayer1.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+                    if ((0.259*width < x && x < 0.645*width) && (height/2 + 0.044*width < y && y <= height/2 + 0.221*width))
+                    {   if (originalIndex/4 == 6) {
+                        mediaPlayer1.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+                    if ((0.259*width < x && x < 0.645*width) && (height/2 + 0.221*width < y && y <= height/2 + width/2))
+                    {   if (originalIndex/4 == 7) {
+                        mediaPlayer1.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    else {
+                        mediaPlayer2.start()
+                        currentIndex += 1
+                        binding.textView.text = shuffledArray[currentIndex]
+                    }
+                    }
+                    else {
+                        Log.d("face", "リスナーが設定されていません")
+                    }
                 }
                 MotionEvent.ACTION_MOVE -> {
                     // タッチが移動した時の処理
