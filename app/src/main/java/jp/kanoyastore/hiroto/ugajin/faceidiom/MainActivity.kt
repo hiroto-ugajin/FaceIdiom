@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 "首が回らない", "鬼の首を取ったような", "雁首を揃える", "小首を傾げる"
         )
 
-        val shuffledArray = questionArray.toMutableList().apply { shuffle() }.toTypedArray()
+        var shuffledArray = questionArray.toMutableList().apply { shuffle() }.toTypedArray()
 
         var currentIndex = 0
 
@@ -61,6 +61,24 @@ class MainActivity : AppCompatActivity() {
         binding.imageView.setImageResource(R.drawable.ladyface)
 
         var touchEnabled = true
+
+        var questionCount = 0
+        var correctCount = 0
+
+
+        binding.resetButton.setOnClickListener {
+            // クイズゲームのリセット処理を実行するメソッドを呼び出す
+            shuffledArray = questionArray.toMutableList().apply { shuffle() }.toTypedArray()
+            questionCount = 0
+            correctCount = 0
+            currentIndex = 0
+
+            // 画面上の表示を初期化する
+            binding.textView.text = shuffledArray[currentIndex]
+
+            // タッチイベントを有効にする
+            touchEnabled = true
+        }
 
         binding.imageView.setOnTouchListener { view, event ->
 
@@ -86,67 +104,97 @@ class MainActivity : AppCompatActivity() {
                     if (touchEnabled) {
                         if ((x <= 0.139 * width || x >= 0.854 * width) && y >= height / 2 - width / 2 && y <= height / 2 + width / 2) {
                             if (originalIndex / 4 == 0) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
+
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
                         if ((x > 0.139 * width && x < 0.854 * width) && (y >= height / 2 - width / 2 && y <= height / 2 - 0.177 * width)) {
                             if (originalIndex / 4 == 1) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
                         if ((0.645 * width < x && x < 0.775 * width) && (0.801 * width <= y && y <= 0.963 * width)) {
                             if (originalIndex / 4 == 2) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
@@ -155,111 +203,156 @@ class MainActivity : AppCompatActivity() {
                             && !((0.645 * width < x && x < 0.775 * width) && (0.801 * width <= y && y <= 0.963 * width))
                         ) {
                             if (originalIndex / 4 == 3) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
                         if ((0.259 * width < x && x < 0.645 * width) && (height / 2 - 0.177 * width < y && y <= height / 2 - 0.073 * width)) {
                             if (originalIndex / 4 == 4) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
                         if ((0.259 * width < x && x < 0.645 * width) && (height / 2 - 0.073 * width < y && y <= height / 2 + 0.044 * width)) {
                             if (originalIndex / 4 == 5) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
                         if ((0.259 * width < x && x < 0.645 * width) && (height / 2 + 0.044 * width < y && y <= height / 2 + 0.221 * width)) {
                             if (originalIndex / 4 == 6) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
                         if ((0.259 * width < x && x < 0.645 * width) && (height / 2 + 0.221 * width < y && y <= height / 2 + width / 2)) {
                             if (originalIndex / 4 == 7) {
+                                questionCount += 1
+                                correctCount += 1
                                 touchEnabled = false
                                 mediaPlayer1.start()
                                 binding.textView.text = answerArray[originalIndex]
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 2000)
                             } else {
+                                questionCount += 1
                                 touchEnabled = false
                                 mediaPlayer2.start()
                                 currentIndex += 1
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    // 2秒後の処理を記述
-                                    binding.textView.text = shuffledArray[currentIndex]
-                                    touchEnabled = true
+                                    if (questionCount < 10) {
+                                        binding.textView.text = shuffledArray[currentIndex]
+                                        touchEnabled = true
+                                    } else if (questionCount >= 10) {
+                                        binding.textView.text = "10問中、${correctCount}問正解"
+                                    }
                                 }, 1000)
                             }
                         }
